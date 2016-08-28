@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.tju.scs.dao.UserDAO">
+
+    <resultMap id="userResult" type="cn.tju.scs.domain.UserDO">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="empl_id" property="employeeId" jdbcType="INTEGER"/>
+        <result column="boss_id" property="bossId" jdbcType="INTEGER"/>
+        <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="modify_time" property="modifyTime" jdbcType="DATE"/>
+    </resultMap>
+
+    <select id="selectUser" parameterType="java.lang.Integer" resultMap="userResult">
+        SELECT * FROM user_info
+        <where>
+            user_id = #{userId}
+        </where>
+    </select>
+
+</mapper>
