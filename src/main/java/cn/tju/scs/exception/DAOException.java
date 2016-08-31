@@ -3,7 +3,7 @@ package cn.tju.scs.exception;
 /**
  * Created by lichen.ll on 2016/8/30.
  */
-public class DAOException extends Exception{
+public class DAOException extends Exception {
 
     private static final long serialVersionUID = 1L;
 

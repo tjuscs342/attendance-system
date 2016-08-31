@@ -5,6 +5,6 @@ package cn.tju.scs.constant;
  */
 public class ErrorConstantColletion {
 
-    public static class UserException{
+    public static class UserException {
     }
 }

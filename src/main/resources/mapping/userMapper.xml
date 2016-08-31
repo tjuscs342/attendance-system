@@ -43,11 +43,13 @@
         </where>
     </select>
 
-    <insert id="insertUser" parameterType="cn.tju.scs.domain.UserDO" keyProperty="userId" keyColumn="user_id" useGeneratedKeys="true">
+    <insert id="insertUser" parameterType="cn.tju.scs.domain.UserDO" keyProperty="userId" keyColumn="user_id"
+            useGeneratedKeys="true">
         INSERT INTO
         <include refid="userTableName"/>
         (user_name,password,boss_id,phone,marry_times,sex,child_num,age,gmt_create,gmt_modified,user_power)
-        VALUES (#{userName},#{password},#{bossId},#{phone},#{marryTimes},#{sex},#{childNum},#{age},#{gmtCreate},#{gmtModified},#{userPower})
+        VALUES
+        (#{userName},#{password},#{bossId},#{phone},#{marryTimes},#{sex},#{childNum},#{age},#{gmtCreate},#{gmtModified},#{userPower})
     </insert>
 
     <sql id="updateCondition">

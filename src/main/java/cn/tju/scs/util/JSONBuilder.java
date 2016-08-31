@@ -9,17 +9,17 @@ import java.util.Map;
  */
 public class JSONBuilder {
 
-    public static Map<String,Object> buildSuccessReturn ( Object data ){
-        Map<String,Object> result = Maps.newHashMap();
-        result.put("success" , "true");
-        result.put("data" , data );
+    public static Map<String, Object> buildSuccessReturn(Object data) {
+        Map<String, Object> result = Maps.newHashMap();
+        result.put("success", "true");
+        result.put("data", data);
         return result;
     }
 
-    public static Map<String,Object> buildErrorReturn ( String errorMsg ){
-        Map<String,Object> result = Maps.newHashMap();
-        result.put("success" , "false");
-        result.put("errorMsg" , errorMsg);
+    public static Map<String, Object> buildErrorReturn(String errorMsg) {
+        Map<String, Object> result = Maps.newHashMap();
+        result.put("success", "false");
+        result.put("errorMsg", errorMsg);
         return result;
     }
 }

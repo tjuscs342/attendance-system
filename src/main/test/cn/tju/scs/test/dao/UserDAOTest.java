@@ -19,20 +19,20 @@ public class UserDAOTest extends TestBase {
     UserDAO userDAO;
 
     @Test
-    public void testSelectUser ( ){
+    public void testSelectUser() {
         UserDO param = new UserDO();
         param.setUserId(116L);
         try {
             List<UserDO> userDO = userDAO.selectUser(param);
-            Assert.assertNotNull( userDO );
-        }catch(DAOException e ){
+            Assert.assertNotNull(userDO);
+        } catch (DAOException e) {
             e.printStackTrace();;
         }
     }
 
     @Test
-    public void testInsertUser( ){
-        try{
+    public void testInsertUser() {
+        try {
             UserDO userDO = new UserDO();
             userDO.setAge(11);
             userDO.setBossId(123L);
@@ -42,43 +42,43 @@ public class UserDAOTest extends TestBase {
             userDO.setPhone("1234567");
             userDO.setUserName("shuanglang");
             userDO.setUserPower(1);
-            userDO.setGmtCreate( new Date());
+            userDO.setGmtCreate(new Date());
             userDO.setGmtModified(new Date());
             userDO.setSex(0);
-            userDAO.insertUser( userDO );
-        }catch(DAOException e ){
+            userDAO.insertUser(userDO);
+        } catch (DAOException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testUpdateContactInfo ( ){
+    public void testUpdateContactInfo() {
         String phone = "4545454554";
         Long userId = 116L;
         try {
             userDAO.updateContactInfo(userId, phone);
-        }catch ( DAOException e ){
+        } catch (DAOException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testUpdatePower ( ){
+    public void testUpdatePower() {
         Integer power = 2;
         Long userId = 116L;
-        try{
-            userDAO.updatePower(userId , power);
-        }catch ( DAOException e ){
+        try {
+            userDAO.updatePower(userId, power);
+        } catch (DAOException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testDeleteUser ( ){
+    public void testDeleteUser() {
         Long userId = 118L;
-        try{
-            userDAO.deleteUser( userId );
-        }catch ( DAOException e ){
+        try {
+            userDAO.deleteUser(userId);
+        } catch (DAOException e) {
             e.printStackTrace();
         }
     }

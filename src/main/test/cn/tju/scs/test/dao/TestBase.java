@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TestBase {
     @Before
-    public void before (){
+    public void before() {
 
     }
 }
