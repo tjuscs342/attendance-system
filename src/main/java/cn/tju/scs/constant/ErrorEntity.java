@@ -15,4 +15,9 @@ public class ErrorEntity {
         this.errorCode = "UNKNOWN_ERROR";
         this.errorMessage = "未知错误";
     }
+
+    public ErrorEntity( String errorCode , String errorMessage ){
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
+    }
 }

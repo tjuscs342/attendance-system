@@ -1,5 +1,6 @@
 package cn.tju.scs.exception;
 
+import cn.tju.scs.constant.ErrorEntity;
 import lombok.Getter;
 
 /**
@@ -25,6 +26,12 @@ public class BLLException extends Exception {
         super(buildErrorEntity(errorMessage, errorCode));
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
+    }
+
+    public BLLException (ErrorEntity error ){
+        super(buildErrorEntity(error.getErrorMessage(), error.getErrorCode()));
+        this.errorCode = error.getErrorCode();
+        this.errorMessage = error.getErrorMessage();
     }
 
 
