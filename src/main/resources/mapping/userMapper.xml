@@ -3,20 +3,84 @@
 <mapper namespace="cn.tju.scs.dao.UserDAO">
 
     <resultMap id="userResult" type="cn.tju.scs.domain.UserDO">
-        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
-        <result column="empl_id" property="employeeId" jdbcType="INTEGER"/>
-        <result column="boss_id" property="bossId" jdbcType="INTEGER"/>
-        <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="DATE"/>
-        <result column="modify_time" property="modifyTime" jdbcType="DATE"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="boss_id" property="bossId" jdbcType="BIGINT"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="marry_times" property="marryTimes" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="TINYINT"/>
+        <result column="child_num" property="childNum" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="DATE"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="DATE"/>
+        <result column="user_power" property="userPower" jdbcType="SMALLINT"/>
     </resultMap>
 
-    <select id="selectUser" parameterType="java.lang.Integer" resultMap="userResult">
-        SELECT * FROM user_info
+    <sql id="userTableName">
+        user_info
+    </sql>
+
+    <select id="selectUser" parameterType="cn.tju.scs.domain.UserDO" resultMap="userResult">
+        SELECT * FROM
+        <include refid="userTableName"/>
         <where>
-            user_id = #{userId}
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+            <if test="userName != null">
+                AND user_name = #{userName}
+            </if>
+            <if test="sex != null">
+                AND sex = #{sex}
+            </if>
+            <if test="bossId != null">
+                AND boss_id = #{bossId}
+            </if>
+            <if test="age != null">
+                AND age = #{age}
+            </if>
         </where>
     </select>
 
+    <insert id="insertUser" parameterType="cn.tju.scs.domain.UserDO" keyProperty="userId" keyColumn="user_id" useGeneratedKeys="true">
+        INSERT INTO
+        <include refid="userTableName"/>
+        (user_name,password,boss_id,phone,marry_times,sex,child_num,age,gmt_create,gmt_modified,user_power)
+        VALUES (#{userName},#{password},#{bossId},#{phone},#{marryTimes},#{sex},#{childNum},#{age},#{gmtCreate},#{gmtModified},#{userPower})
+    </insert>
+
+    <sql id="updateCondition">
+        <where>
+            <if test="userId != null">
+                user_id = ${userId}
+            </if>
+        </where>
+    </sql>
+
+    <update id="updateContactInfo">
+        UPDATE
+        <include refid="userTableName"/>
+        SET phone = #{phone}
+        <include refid="updateCondition">
+            <property name="userId" value="#{userId}"/>
+        </include>
+    </update>
+
+    <update id="updatePower">
+        UPDATE
+        <include refid="userTableName"/>
+        SET user_power = #{power}
+        <include refid="updateCondition">
+            <property name="userId" value="#{userId}"/>
+        </include>
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM
+        <include refid="userTableName"/>
+        <include refid="updateCondition">
+            <property name="userId" value="#{userId}"/>
+        </include>
+    </delete>
 </mapper>

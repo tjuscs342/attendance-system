@@ -1,72 +1,37 @@
 package cn.tju.scs.domain;
 
+import lombok.Data;
+import org.apache.ibatis.type.Alias;
+
 import java.util.Date;
 
 /**
- * Created by lichen.ll on 2016/8/28.
+ * Created by lichen.ll on 2016/8/30.
  */
-public class UserDO {
-    private Integer userId;
-    private Integer employeeId;
-    private Integer bossId;
+
+public @Data class UserDO {
+    //用户ID
+    private Long userId;
+    //用户名
     private String userName;
-    private String userPwd;
-    private Date createTime;
-    private Date modifyTime;
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public Integer getBossId() {
-        return bossId;
-    }
-
-    public void setBossId(Integer bossId) {
-        this.bossId = bossId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPwd() {
-        return userPwd;
-    }
-
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
+    //密码
+    private String password;
+    //主管ID
+    private Long bossId;
+    //联系电话
+    private String phone;
+    //结婚的次数，<=0代表未婚，大于0代表已婚
+    private Integer marryTimes;
+    //性别,0代表男，1代表女
+    private Integer sex;
+    //子女的数量
+    private Integer childNum;
+    //年龄
+    private Integer age;
+    //创建日期
+    private Date gmtCreate;
+    //修改日期
+    private Date gmtModified;
+    //用户权限，0代表部门主管，1代表组长，2代表普通员工
+    private Integer userPower;
 }
