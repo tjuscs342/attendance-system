@@ -36,7 +36,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(method= RequestMethod.POST)
+    @RequestMapping(value="login",method= RequestMethod.POST)
     @ResponseBody
     public Object login (String userName , String password , HttpSession session ){
         try{
