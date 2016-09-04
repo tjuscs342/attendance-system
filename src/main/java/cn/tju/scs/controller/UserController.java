@@ -7,7 +7,6 @@ import cn.tju.scs.util.JSONBuilder;
 import com.google.common.base.Strings;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
