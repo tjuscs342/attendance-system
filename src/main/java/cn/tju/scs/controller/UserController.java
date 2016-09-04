@@ -27,13 +27,13 @@ public class UserController {
 
     @RequestMapping(method= RequestMethod.GET)
     @ResponseBody
-    public Object getUserInfoList (){
+    public Object getUserInfoList ( HttpSession session ){
         try {
-            List list = userManager.getUserList();
-            return JSONBuilder.buildSuccessReturn( list );
-        }catch( BLLException e ){
+            UserDO userDO = (UserDO)session.getAttribute("user");
+            return JSONBuilder.buildSuccessReturn( userDO );
+        }catch( Throwable e ){
             logger.error(e);
-            return JSONBuilder.buildErrorReturn( e.getErrorMessage());
+            return JSONBuilder.buildErrorReturn( e.getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ public class UserController {
             return JSONBuilder.buildSuccessReturn(null);
         }catch ( BLLException e ){
             logger.error(e);
-            return JSONBuilder.buildErrorReturn( e.getMessage());
+            return JSONBuilder.buildErrorReturn( e.getErrorMessage());
         }
     }
 
