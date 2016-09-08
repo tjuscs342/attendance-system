@@ -1,6 +1,7 @@
 package cn.tju.scs.service.impl;
 
 import cn.tju.scs.constant.ApplyTypes;
+import cn.tju.scs.constant.AuditStatus;
 import cn.tju.scs.constant.ErrorConstantColletion;
 import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.exception.BLLException;
@@ -21,24 +22,24 @@ public class YearApplyOperate implements ApplyOperate {
     ApplyManager applyManager;
 
     @Override
-    public void doOperate( Long userId , Date startDate, Date endDate, String reason) throws BLLException {
+    public void doOperate(Long userId, Date startDate, Date endDate, String reason) throws BLLException {
 
-        int days = DateUtils.getDuration( startDate , endDate );
-        applyManager.clearUselessApply( userId , ApplyTypes.APPLY_YEAR);
+        int days = DateUtils.getDuration(startDate, endDate);
+        applyManager.clearUselessApply(userId, ApplyTypes.APPLY_YEAR);
         List<ApplyDO> list = applyManager.selectApplysByType(userId, ApplyTypes.APPLY_YEAR);
-        if( list == null )
+        if (list == null)
             throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
 
-        int unUsed = 0;
-        for ( ApplyDO item : list  ){
-            if( !DateUtils.checkUseless(item.getApplyDate()))
-                unUsed++;
+        int used = 0;
+        for (ApplyDO item : list) {
+            if (!DateUtils.checkUseless(item.getApplyDate()) && item.getResult().equals(AuditStatus.SUCCESS))
+                used += DateUtils.getDuration(item.getStartDate(), item.getEndDate());
         }
 
-        if( days + unUsed > YearApplySalaryRule.DAYS_OF_YEAR){
+        if (days + used > YearApplySalaryRule.DAYS_OF_YEAR) {
             throw Exceptions.newBLLException(ErrorConstantColletion.ApplyRuleException.APPLY_TOO_MUCH);
         }
 
-        applyManager.applyByType(userId , startDate , endDate , ApplyTypes.APPLY_YEAR , reason );
+        applyManager.applyByType(userId, startDate, endDate, ApplyTypes.APPLY_YEAR, reason);
     }
 }

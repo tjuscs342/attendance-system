@@ -1,5 +1,6 @@
 package cn.tju.scs.manager.impl;
 
+import cn.tju.scs.constant.AuditStatus;
 import cn.tju.scs.constant.ErrorConstantColletion;
 import cn.tju.scs.dao.ApplyDAO;
 import cn.tju.scs.dao.UserDAO;
@@ -75,6 +76,7 @@ public class ApplyManagerImpl implements ApplyManager {
         applyDO.setStartDate(start);
         applyDO.setEndDate(end);
         applyDO.setUserId(userId);
+        applyDO.setResult(AuditStatus.PENDING);
         try {
             applyDAO.insertApplyDO(applyDO);
         }catch ( DAOException e ){
