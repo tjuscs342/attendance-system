@@ -26,7 +26,7 @@ public class UserController {
 
     @RequestMapping(method= RequestMethod.GET)
     @ResponseBody
-    public Object getUserInfoList ( HttpSession session ){
+    public Object getUserInfo ( HttpSession session ){
         try {
             UserDO userDO = (UserDO)session.getAttribute("user");
             return JSONBuilder.buildSuccessReturn( userDO );

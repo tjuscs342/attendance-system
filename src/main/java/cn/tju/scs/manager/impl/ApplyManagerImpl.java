@@ -13,6 +13,7 @@ import cn.tju.scs.exception.Exceptions;
 import cn.tju.scs.manager.ApplyManager;
 import cn.tju.scs.util.DateUtils;
 import com.google.common.collect.Lists;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.List;
 /**
  * Created by lichen.ll on 2016/9/7.
  */
+@Service
 public class ApplyManagerImpl implements ApplyManager {
 
     @Resource

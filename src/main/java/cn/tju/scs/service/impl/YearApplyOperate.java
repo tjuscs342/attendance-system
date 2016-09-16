@@ -7,7 +7,9 @@ import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.exception.Exceptions;
 import cn.tju.scs.manager.ApplyManager;
+import cn.tju.scs.manager.AuditManager;
 import cn.tju.scs.service.ApplyOperate;
+import cn.tju.scs.service.AuditOperate;
 import cn.tju.scs.util.DateUtils;
 import java.util.List;
 import javax.annotation.Resource;
@@ -16,10 +18,13 @@ import java.util.Date;
 /**
  * Created by lichen.ll on 2016/9/7.
  */
-public class YearApplyOperate implements ApplyOperate {
+public class YearApplyOperate implements ApplyOperate,AuditOperate {
 
     @Resource
     ApplyManager applyManager;
+
+    @Resource
+    AuditManager auditManager;
 
     @Override
     public void doOperate(Long userId, Date startDate, Date endDate, String reason) throws BLLException {
@@ -41,5 +46,15 @@ public class YearApplyOperate implements ApplyOperate {
         }
 
         applyManager.applyByType(userId, startDate, endDate, ApplyTypes.APPLY_YEAR, reason);
+    }
+
+    @Override
+    public void auditPass(String remark, Long operatorId, String operatorName, Long applicationId) throws BLLException {
+        auditManager.auditApply(applicationId,2,remark,operatorId,operatorName);
+    }
+
+    @Override
+    public void auditFail(String remark, Long operatorId, String operatorName, Long applicationId) throws BLLException {
+        auditManager.auditApply(applicationId,3,remark,operatorId,operatorName);
     }
 }
