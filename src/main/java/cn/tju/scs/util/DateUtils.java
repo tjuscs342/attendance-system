@@ -1,6 +1,7 @@
 package cn.tju.scs.util;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,5 +26,10 @@ public class DateUtils {
             if( !(s1.charAt(i) == s2.charAt(i)))
                 return true;
         return false;
+    }
+
+    public static Date parseDate ( String pattern ) throws ParseException{
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.parse(pattern);
     }
 }

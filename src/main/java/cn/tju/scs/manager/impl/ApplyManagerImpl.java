@@ -38,6 +38,36 @@ public class ApplyManagerImpl implements ApplyManager {
         if (applyType == null)
             return Lists.newArrayList();
 
+
+        checkUser( userId );
+
+        ApplyDO applyDO = ApplyFactory.getEmptyApply();
+        applyDO.setUserId(userId);
+        applyDO.setApplyType(applyType);
+        try{
+            return applyDAO.selectApplyDO( applyDO );
+        }catch ( DAOException e ){
+            throw Exceptions.newBLLException(ErrorConstantColletion.ApplyException.GET_APPLY_INFO_ERROR);
+        }
+    }
+
+    @Override
+    public List<ApplyDO> selectApplys(Long userId) throws BLLException {
+        if (userId == null)
+            throw Exceptions.newBLLException(ErrorConstantColletion.UserException.NULL_USER_ID_ERROR);
+
+        checkUser( userId );
+
+        ApplyDO applyDO = ApplyFactory.getEmptyApply();
+        applyDO.setUserId(userId);
+        try{
+            return applyDAO.selectApplyDO( applyDO );
+        }catch ( DAOException e ){
+            throw Exceptions.newBLLException(ErrorConstantColletion.ApplyException.GET_APPLY_INFO_ERROR);
+        }
+    }
+
+    private void checkUser ( Long userId ) throws BLLException{
         try {
             UserDO userDO = new UserDO();
             userDO.setUserId(userId);
@@ -46,14 +76,6 @@ public class ApplyManagerImpl implements ApplyManager {
                 throw Exceptions.newBLLException(ErrorConstantColletion.UserException.UN_EXITED_USER_ERROR);
         } catch (DAOException e) {
             throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
-        }
-        ApplyDO applyDO = ApplyFactory.getEmptyApply();
-        applyDO.setUserId(userId);
-        applyDO.setApplyType(applyType);
-        try{
-            return applyDAO.selectApplyDO( applyDO );
-        }catch ( DAOException e ){
-            throw Exceptions.newBLLException(ErrorConstantColletion.ApplyException.GET_APPLY_INFO_ERROR);
         }
     }
 
@@ -81,6 +103,21 @@ public class ApplyManagerImpl implements ApplyManager {
         applyDO.setResult(AuditStatus.PENDING);
         try {
             applyDAO.insertApplyDO(applyDO);
+        }catch ( DAOException e ){
+            e.printStackTrace();
+            throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public void updateApplyInfo(Long applicationId, Integer type, Date start, Date end) throws BLLException{
+        ApplyDO applyDO = ApplyFactory.getEmptyApply();
+        applyDO.setApplicationId(applicationId);
+        applyDO.setApplyType(type);
+        applyDO.setStartDate(start);
+        applyDO.setEndDate(end);
+        try {
+            applyDAO.updateApplyDO(applyDO);
         }catch ( DAOException e ){
             e.printStackTrace();
             throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);

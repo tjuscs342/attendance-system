@@ -11,6 +11,7 @@ import cn.tju.scs.manager.AuditManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by lichen.ll on 2016/9/16.
@@ -32,6 +33,18 @@ public class AuditManagerImpl implements AuditManager{
         try {
             applyDAO.updateApplyDO(param);
         }catch ( DAOException e ){
+            throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public List<ApplyDO> selectApplys(long userId) throws BLLException {
+        try {
+            ApplyDO applyDO = ApplyFactory.getEmptyApply();
+            applyDO.setOperatorId(userId);
+            return applyDAO.selectApplyDO(applyDO);
+        }catch ( DAOException e ){
+            e.printStackTrace();
             throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
         }
     }

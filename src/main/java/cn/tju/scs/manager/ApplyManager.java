@@ -13,7 +13,11 @@ public interface ApplyManager {
 
     List<ApplyDO> selectApplysByType ( Long userId , Integer applyType ) throws BLLException;
 
+    List<ApplyDO> selectApplys ( Long userId ) throws BLLException;
+
     void clearUselessApply ( Long userId , Integer applyType ) throws BLLException;
 
     void applyByType (Long userId , Date start , Date end , Integer applyType , String reason ) throws BLLException;
+
+    void updateApplyInfo ( Long applicationId , Integer type , Date start , Date end ) throws BLLException;
 }
