@@ -50,11 +50,11 @@ public class YearApplyOperate implements ApplyOperate,AuditOperate {
 
     @Override
     public void auditPass(String remark, Long operatorId, String operatorName, Long applicationId) throws BLLException {
-        auditManager.auditApply(applicationId,2,remark,operatorId,operatorName);
+        auditManager.auditApply(applicationId,AuditStatus.SUCCESS,remark,operatorId,operatorName);
     }
 
     @Override
     public void auditFail(String remark, Long operatorId, String operatorName, Long applicationId) throws BLLException {
-        auditManager.auditApply(applicationId,3,remark,operatorId,operatorName);
+        auditManager.auditApply(applicationId,AuditStatus.FAIL,remark,operatorId,operatorName);
     }
 }
