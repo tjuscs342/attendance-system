@@ -1,5 +1,6 @@
 package cn.tju.scs.controller;
 
+import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.domain.UserDO;
 import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.manager.ApplyManager;
@@ -9,6 +10,7 @@ import cn.tju.scs.validator.ApplyTypeValidator;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -29,7 +31,8 @@ public class ApplyController {
     @Resource
     ApplyManager applyManager;
 
-    @RequestMapping(method= RequestMethod.POST)
+    @RequestMapping(method=RequestMethod.POST)
+    @ResponseBody
     public Object apply ( Integer type , String reason , String start , String end , HttpSession session){
         UserDO userDO= (UserDO)session.getAttribute("user");
         if( type == null || start == null || end == null )
@@ -53,11 +56,12 @@ public class ApplyController {
     }
 
     @RequestMapping(method=RequestMethod.GET)
+    @ResponseBody
     public Object getApplys ( HttpSession session ){
         UserDO userDO = (UserDO) session.getAttribute("user");
         long userId = userDO.getUserId();
         try {
-            List list = applyManager.selectApplys(userId);
+            List<ApplyDO> list = applyManager.selectApplys(userId);
             return JSONBuilder.buildSuccessReturn(list);
         }catch ( BLLException e ){
             return JSONBuilder.buildErrorReturn(e.getErrorMessage());
@@ -65,6 +69,7 @@ public class ApplyController {
     }
 
     @RequestMapping(method=RequestMethod.PUT)
+    @ResponseBody
     public Object updateApply ( Long applyId , Integer type , String start , String end ){
         try {
             Date startDate = DateUtils.parseDate(start);

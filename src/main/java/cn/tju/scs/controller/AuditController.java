@@ -7,6 +7,7 @@ import cn.tju.scs.util.JSONBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import javax.annotation.Resource;
@@ -25,11 +26,13 @@ public class AuditController {
     AuditManager auditManager;
 
     @RequestMapping(method = RequestMethod.GET )
+    @ResponseBody
     public Object getApplyToAudit ( HttpSession session ){
         try{
             UserDO userDO = (UserDO)session.getAttribute("user");
             long userId = userDO.getUserId();
             List list = auditManager.selectApplys(userId);
+            System.out.println(list.size());
             return JSONBuilder.buildSuccessReturn(list);
         }catch ( BLLException e ){
             logger.error(e.getErrorCode());
@@ -38,6 +41,7 @@ public class AuditController {
     }
 
     @RequestMapping(method = RequestMethod.PUT )
+    @ResponseBody
     public Object audit ( String auditStatus , String remark , Long applicationId , HttpSession session ){
         try{
             UserDO userDO = (UserDO)session.getAttribute("user");
