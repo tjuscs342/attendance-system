@@ -8,10 +8,9 @@ import cn.tju.scs.util.DateUtils;
 import cn.tju.scs.util.JSONBuilder;
 import cn.tju.scs.validator.ApplyTypeValidator;
 import org.apache.log4j.Logger;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import vo.UpdateApplyVO;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -68,13 +67,20 @@ public class ApplyController {
         }
     }
 
-    @RequestMapping(method=RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public Object updateApply ( Long applyId , Integer type , String start , String end ){
+    public Object updateApply ( @RequestParam Long applyId ,
+                                @RequestParam(required = false) String start ,
+                                @RequestParam(required = false) Integer type,
+                                @RequestParam(required = false) String end,
+                                @RequestParam(required = false) String reason){
         try {
-            Date startDate = DateUtils.parseDate(start);
-            Date endDate = DateUtils.parseDate(end);
-            applyManager.updateApplyInfo(applyId , type , startDate , endDate );
+            Date startDate=null,endDate=null;
+            if( start != null )
+                startDate= DateUtils.parseDate(start);
+            if( end != null )
+                endDate = DateUtils.parseDate(end);
+            applyManager.updateApplyInfo(applyId , type , startDate , endDate , reason );
         }catch ( ParseException e ){
             return JSONBuilder.buildErrorReturn(e.getMessage());
         }catch ( BLLException e ){

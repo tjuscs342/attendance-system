@@ -49,6 +49,7 @@ public class ApplyDAOTest extends TestBase {
         ApplyDO applyDO = new ApplyDO();
         applyDO.setApplicationId(2L);
         applyDO.setReason("hahaha");
+        applyDO.setEndDate(new Date());
         try {
             applyDAO.updateApplyDO(applyDO);
         } catch (DAOException e) {

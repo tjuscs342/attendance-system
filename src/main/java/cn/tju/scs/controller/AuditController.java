@@ -5,10 +5,8 @@ import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.manager.AuditManager;
 import cn.tju.scs.util.JSONBuilder;
 import org.apache.log4j.Logger;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -42,7 +40,10 @@ public class AuditController {
 
     @RequestMapping(method = RequestMethod.PUT )
     @ResponseBody
-    public Object audit ( String auditStatus , String remark , Long applicationId , HttpSession session ){
+    public Object audit (@RequestParam String auditStatus ,
+                         @RequestParam String remark ,
+                         @RequestParam Long applicationId ,
+                         @RequestParam HttpSession session ){
         try{
             UserDO userDO = (UserDO)session.getAttribute("user");
             int status = 1;

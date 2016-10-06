@@ -19,5 +19,5 @@ public interface ApplyManager {
 
     void applyByType (Long userId , Date start , Date end , Integer applyType , String reason ) throws BLLException;
 
-    void updateApplyInfo ( Long applicationId , Integer type , Date start , Date end ) throws BLLException;
+    void updateApplyInfo ( Long applicationId , Integer type , Date start , Date end , String reason ) throws BLLException;
 }

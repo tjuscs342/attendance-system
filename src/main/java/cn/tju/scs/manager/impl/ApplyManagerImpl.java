@@ -110,10 +110,11 @@ public class ApplyManagerImpl implements ApplyManager {
     }
 
     @Override
-    public void updateApplyInfo(Long applicationId, Integer type, Date start, Date end) throws BLLException{
+    public void updateApplyInfo(Long applicationId, Integer type, Date start, Date end , String reason) throws BLLException{
         ApplyDO applyDO = ApplyFactory.getEmptyApply();
         applyDO.setApplicationId(applicationId);
         applyDO.setApplyType(type);
+        applyDO.setReason(reason);
         applyDO.setStartDate(start);
         applyDO.setEndDate(end);
         try {
