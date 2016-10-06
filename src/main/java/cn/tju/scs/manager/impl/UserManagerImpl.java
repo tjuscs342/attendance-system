@@ -54,7 +54,8 @@ public class UserManagerImpl implements UserManager {
         UserDO userDO = new UserDO();
         userDO.setUserName(userName);
         try {
-            return userDAO.selectUser(userDO).get(0);
+            List<UserDO> list = userDAO.selectUser(userDO);
+            return list==null||list.size()==0?null:list.get(0);
         } catch (DAOException e) {
             logger.error(ErrorConstantColletion.UserException.GET_USER_INFO_ERROR, e);
             throw Exceptions.newBLLException(ErrorConstantColletion.UserException.GET_USER_INFO_ERROR);
