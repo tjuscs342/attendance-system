@@ -7,4 +7,6 @@ public interface ApplyTypes {
 
     //年假
     Integer APPLY_YEAR = 1;
+    //病假
+    Integer APPLY_SICK = 2;
 }
