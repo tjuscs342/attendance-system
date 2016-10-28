@@ -53,8 +53,10 @@ public class UserController {
             }
 
             UserDO boss_userDO = userManager.getUserInfoById( userDO.getBossId());
+            Map<String, Object> result_noBoss = Maps.newHashMap();
+            result_noBoss.put("Warning","boss not exist");
             if (boss_userDO == null){
-                return JSONBuilder.buildErrorReturn("boss not exist");
+                return JSONBuilder.buildSuccessReturn(result_noBoss);
             }
             Map<String, Object> result = Maps.newHashMap();
             result.put("bossName",boss_userDO.getUserName());
