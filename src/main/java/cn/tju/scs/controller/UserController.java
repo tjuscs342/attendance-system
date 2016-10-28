@@ -6,7 +6,6 @@ import cn.tju.scs.manager.UserManager;
 import cn.tju.scs.util.JSONBuilder;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-import com.sun.javafx.collections.MappingChange;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
