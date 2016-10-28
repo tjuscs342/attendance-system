@@ -5,10 +5,13 @@ import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.manager.UserManager;
 import cn.tju.scs.util.JSONBuilder;
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
+import com.sun.javafx.collections.MappingChange;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * Created by lichen.ll on 2016/8/31.
@@ -54,8 +57,10 @@ public class UserController {
             if (boss_userDO == null){
                 return JSONBuilder.buildErrorReturn("boss not exist");
             }
+            Map<String, Object> result = Maps.newHashMap();
+            result.put("bossName",boss_userDO.getUserName());
             session.setAttribute("user", userDO );
-            return JSONBuilder.buildSuccessReturn( boss_userDO.getUserName());
+            return JSONBuilder.buildSuccessReturn( result);
         }catch ( BLLException e ){
             logger.error(e);
             return JSONBuilder.buildErrorReturn( e.getErrorMessage());
