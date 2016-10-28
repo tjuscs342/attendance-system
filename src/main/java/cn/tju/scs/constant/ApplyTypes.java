@@ -9,4 +9,6 @@ public interface ApplyTypes {
     Integer APPLY_YEAR = 1;
     //病假
     Integer APPLY_SICK = 2;
+    //marry vacation
+    Integer APPLY_MARRY = 3;
 }

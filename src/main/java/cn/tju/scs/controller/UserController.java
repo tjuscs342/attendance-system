@@ -49,8 +49,9 @@ public class UserController {
             if( !userDO.getUserName().equals(userName) || !userDO.getPassword().equals(password)){
                 return JSONBuilder.buildErrorReturn("用户名密码错误");
             }
+            UserDO boss_userDO = userManager.getUserInfoById( userDO.getBossId());
             session.setAttribute("user", userDO );
-            return JSONBuilder.buildSuccessReturn(null);
+            return JSONBuilder.buildSuccessReturn( boss_userDO.getUserName());
         }catch ( BLLException e ){
             logger.error(e);
             return JSONBuilder.buildErrorReturn( e.getErrorMessage());

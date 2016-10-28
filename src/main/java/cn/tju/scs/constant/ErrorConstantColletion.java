@@ -18,6 +18,8 @@ public class ErrorConstantColletion {
 
     public static class ApplyRuleException{
         public final static ErrorEntity APPLY_TOO_MUCH = new ErrorEntity("APPLY_TOO_MUCH","没有那么多可请的年假");
+        public final static ErrorEntity APPLY_TOO_MUCH_REMARRY = new ErrorEntity("APPLY_TOO_MUCH_REMARRY","remarry or early-marry should be less than 3 days");
+        public final static ErrorEntity APPLY_TOO_MUCH_MARRY = new ErrorEntity("APPLY_TOO_MUCH_MARRY","marry should be less than 10 days");
     }
 
     public final static ErrorEntity SYSTEM_ERROR = new ErrorEntity("SYSTEM_ERROR","系统繁忙");
