@@ -49,11 +49,11 @@ public class UserController {
             if( !userDO.getUserName().equals(userName) || !userDO.getPassword().equals(password)){
                 return JSONBuilder.buildErrorReturn("用户名密码错误");
             }
-            if (userDO.getBossId().toString() == null){
-                return JSONBuilder.buildErrorReturn("无BOSS");
-            }
-            UserDO boss_userDO = userManager.getUserInfoById( userDO.getBossId());
 
+            UserDO boss_userDO = userManager.getUserInfoById( userDO.getBossId());
+            if (boss_userDO == null){
+                return JSONBuilder.buildErrorReturn("boss not exist");
+            }
             session.setAttribute("user", userDO );
             return JSONBuilder.buildSuccessReturn( boss_userDO.getUserName());
         }catch ( BLLException e ){
