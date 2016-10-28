@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1627c672-da5d-4d90-91dd-92580ee9dc3c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/tju/scs/controller/myCROSFilter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/tju/scs/service/impl/MarryApplyOperate.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/tju/scs/service/impl/MarryApplySalaryRule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/tju/scs/constant/ApplyTypes.java" afterPath="$PROJECT_DIR$/src/main/java/cn/tju/scs/constant/ApplyTypes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/tju/scs/constant/ErrorConstantColletion.java" afterPath="$PROJECT_DIR$/src/main/java/cn/tju/scs/constant/ErrorConstantColletion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/tju/scs/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/cn/tju/scs/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
     </list>
     <ignored path="attendence-system.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -108,8 +101,8 @@
       <file leaf-file-name="UserController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/tju/scs/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="46" column="55" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+            <state relative-caret-position="478">
+              <caret line="52" column="61" selection-start-line="52" selection-start-column="61" selection-end-line="52" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -1217,12 +1210,12 @@
       <workItem from="1477397239343" duration="2059000" />
       <workItem from="1477404449033" duration="1068000" />
       <workItem from="1477465712376" duration="9091000" />
-      <workItem from="1477633861356" duration="902000" />
+      <workItem from="1477633861356" duration="1682000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13720000" />
+    <option name="totallyTimeSpent" value="14500000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
@@ -1678,8 +1671,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/tju/scs/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="46" column="55" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+        <state relative-caret-position="478">
+          <caret line="52" column="61" selection-start-line="52" selection-start-column="61" selection-end-line="52" selection-end-column="61" />
           <folding />
         </state>
       </provider>
