@@ -17,9 +17,9 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * Created by liu on 16-10-26.
+ * Created by liu on 16-10-30.
  */
-public class MarryApplyOperate implements ApplyOperate,AuditOperate {
+public class MaternityApplyOperate implements ApplyOperate,AuditOperate{
     @Resource
     ApplyManager applyManager;
     @Resource
@@ -28,27 +28,30 @@ public class MarryApplyOperate implements ApplyOperate,AuditOperate {
     UserManager userManager;
 
     @Override
-    public void doOperate(Long userId , Date startDate , Date endDate , String reason) throws BLLException{
+    public void doOperate(Long userId, Date startDate, Date endDate, String reason) throws BLLException{
+        UserDO userDO = new UserDO();
         int days = DateUtils.getDuration(startDate,endDate);
-        applyManager.clearUselessApply(userId, ApplyTypes.APPLY_MARRY   );
-        UserDO userDO = userManager.getUserInfoById(userId);
-        if (userDO == null)
-            throw Exceptions.newBLLException(ErrorConstantColletion.UserException.GET_USER_INFO_ERROR);
-        Integer sex = userDO.getSex();
-        Integer age = userDO.getAge();
-        Integer marryTimes = userDO.getMarryTimes();
-        if (((sex == 0 && age < 25) || (sex == 1 && age < 23) || (marryTimes != 0)) && (days > MarryApplySalaryRule.DAYS_OF_REMARRY)){
-            throw Exceptions.newBLLException( ErrorConstantColletion.ApplyRuleException.APPLY_TOO_MUCH_REMARRY );
+        userDO = userManager.getUserInfoById(userId);
+        int age = userDO.getAge();
+        if(userDO.getSex() == 1 && age >= 24){
+            if(days > MaternityApplySalaryRule.DAYS_OF_MATERNITY) {
+                throw Exceptions.newBLLException(ErrorConstantColletion.ApplyRuleException.APPLY_TOO_MUCH_MATERNITY);
+            }
         }
-        if(((sex == 0 && age >= 25) || (sex == 1 && age >= 23)) && (marryTimes == 0) && (days >MarryApplySalaryRule.DAYS_OF_MARRY)){
-            throw Exceptions.newBLLException(ErrorConstantColletion.ApplyRuleException.APPLY_TOO_MUCH_MARRY);
+        else if(userDO.getSex() == 1){
+            if (days > MaternityApplySalaryRule.DAYS_OF_EARLY_MATERNITY){
+                throw Exceptions.newBLLException(ErrorConstantColletion.ApplyRuleException.APPLY_TOO_MUCH_MATERNITY);
+            }
         }
+        else if(userDO.getSex() == 0){
+            throw Exceptions.newBLLException(ErrorConstantColletion.ApplyRuleException.APPLY_NOT_SUIT_MATERNITY);
+        }
+        applyManager.applyByType(userId, startDate, endDate, ApplyTypes.APPLY_MATERNITY, reason);
 
-        applyManager.applyByType(userId, startDate, endDate, ApplyTypes.APPLY_MARRY, reason);
     }
+    @Override
     public void auditPass(String remark, Long operatorId, String operatorName, Long applicationId) throws BLLException {
         auditManager.auditApply(applicationId, AuditStatus.SUCCESS,remark,operatorId,operatorName);
-
     }
 
     @Override

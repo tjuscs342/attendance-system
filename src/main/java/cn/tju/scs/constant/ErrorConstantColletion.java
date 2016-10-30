@@ -20,6 +20,9 @@ public class ErrorConstantColletion {
         public final static ErrorEntity APPLY_TOO_MUCH = new ErrorEntity("APPLY_TOO_MUCH","没有那么多可请的年假");
         public final static ErrorEntity APPLY_TOO_MUCH_REMARRY = new ErrorEntity("APPLY_TOO_MUCH_REMARRY","remarry or early-marry should be less than 3 days");
         public final static ErrorEntity APPLY_TOO_MUCH_MARRY = new ErrorEntity("APPLY_TOO_MUCH_MARRY","marry should be less than 10 days");
+        public final static ErrorEntity APPLY_TOO_MUCH_EVENT = new ErrorEntity("APPLY_TOO_MUCH_EVENT","should less than 14 days");
+        public final static ErrorEntity APPLY_TOO_MUCH_MATERNITY = new ErrorEntity("APPLY_TOO_MUCH_MATERNITY","you apply too much");
+        public final static ErrorEntity APPLY_NOT_SUIT_MATERNITY = new ErrorEntity("APPLY_NOT_SUIT_MATERNITY","sorry,you are male");
     }
 
     public final static ErrorEntity SYSTEM_ERROR = new ErrorEntity("SYSTEM_ERROR","系统繁忙");

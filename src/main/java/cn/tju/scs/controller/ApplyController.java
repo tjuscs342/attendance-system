@@ -4,6 +4,7 @@ import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.domain.UserDO;
 import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.manager.ApplyManager;
+import cn.tju.scs.service.impl.*;
 import cn.tju.scs.util.DateUtils;
 import cn.tju.scs.util.JSONBuilder;
 import cn.tju.scs.validator.ApplyTypeValidator;
@@ -44,8 +45,28 @@ public class ApplyController {
             if( DateUtils.getDuration(startDate,endDate) < 1 ){
                 return JSONBuilder.buildErrorReturn("请假日期区间不合法");
             }
-            applyManager.clearUselessApply(userDO.getUserId(),type);
-            applyManager.applyByType(userDO.getUserId(),startDate,endDate,type,reason);
+            if(type == 1){
+                YearApplyOperate yearApplyOperate = new YearApplyOperate();
+                yearApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+            else if(type == 2){
+                SickApplyOperate sickApplyOperate = new SickApplyOperate();
+                sickApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+            else if(type == 3){
+                MarryApplyOperate marryApplyOperate =new MarryApplyOperate();
+                marryApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+            else if(type == 4){
+                EventApplyOperate eventApplyOperate =new EventApplyOperate();
+                eventApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+            else if(type == 5){
+                MaternityApplyOperate maternityApplyOperate =new MaternityApplyOperate();
+                maternityApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+//            applyManager.clearUselessApply(userDO.getUserId(),type);
+//            applyManager.applyByType(userDO.getUserId(),startDate,endDate,type,reason);
         }catch ( ParseException e ){
             return JSONBuilder.buildErrorReturn("日期格式错误");
         }catch ( BLLException e ){
