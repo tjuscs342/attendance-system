@@ -23,6 +23,11 @@
         <jetty.version>6.1.9</jetty.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>tomcat</groupId>
+            <artifactId>jasper-runtime</artifactId>
+            <version>5.5.23</version>
+        </dependency>
         <!--jetty CORS-->
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
@@ -37,7 +42,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlets</artifactId>
-            <version>9.3.0.RC1</version>
+            <version>7.0.0.M0</version>
         </dependency>
         <!--添加lombok(重复代码消除)依赖-->
         <dependency>
