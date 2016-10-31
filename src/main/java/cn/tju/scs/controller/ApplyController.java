@@ -29,7 +29,7 @@ public class ApplyController {
     private Logger logger = Logger.getLogger(ApplyController.class);
 
     @Resource
-    ApplyOperate applyOperate;
+    ApplyOperate yearApplyOperate;
 
     @Resource
     ApplyManager applyManager;
@@ -49,7 +49,7 @@ public class ApplyController {
                 return JSONBuilder.buildErrorReturn("请假日期区间不合法");
             }
             //applyManager.clearUselessApply(userDO.getUserId(),type);
-            applyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            yearApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
             //applyManager.applyByType(userDO.getUserId(),startDate,endDate,type,reason);
         }catch ( ParseException e ){
             return JSONBuilder.buildErrorReturn("日期格式错误");
