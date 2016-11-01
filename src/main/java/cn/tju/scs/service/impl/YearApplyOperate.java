@@ -8,6 +8,7 @@ import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.exception.Exceptions;
 import cn.tju.scs.manager.ApplyManager;
 import cn.tju.scs.manager.AuditManager;
+import cn.tju.scs.manager.impl.ApplyManagerImpl;
 import cn.tju.scs.service.ApplyOperate;
 import cn.tju.scs.service.AuditOperate;
 import cn.tju.scs.util.DateUtils;
