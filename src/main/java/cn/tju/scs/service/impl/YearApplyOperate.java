@@ -12,6 +12,8 @@ import cn.tju.scs.manager.impl.ApplyManagerImpl;
 import cn.tju.scs.service.ApplyOperate;
 import cn.tju.scs.service.AuditOperate;
 import cn.tju.scs.util.DateUtils;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import javax.annotation.Resource;
 import java.util.Date;
@@ -19,6 +21,7 @@ import java.util.Date;
 /**
  * Created by lichen.ll on 2016/9/7.
  */
+@Service("yearApplyOperate")
 public class YearApplyOperate implements ApplyOperate,AuditOperate {
 
     @Resource
@@ -38,6 +41,7 @@ public class YearApplyOperate implements ApplyOperate,AuditOperate {
 
         int used = 0;
         for (ApplyDO item : list) {
+            if(item.getResult() == null )continue;
             if (!DateUtils.checkUseless(item.getApplyDate()) && item.getResult().equals(AuditStatus.SUCCESS))
                 used += DateUtils.getDuration(item.getStartDate(), item.getEndDate());
         }

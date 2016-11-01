@@ -14,6 +14,7 @@ import cn.tju.scs.manager.impl.AuditManagerImpl;
 import cn.tju.scs.service.ApplyOperate;
 import cn.tju.scs.service.AuditOperate;
 import cn.tju.scs.util.DateUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -22,12 +23,13 @@ import java.util.List;
 /**
  * Created by Liu on 2016/10/23.
  */
+@Service("sickApplyOperate")
 public class SickApplyOperate implements ApplyOperate,AuditOperate {
     @Resource
-    ApplyManagerImpl applyManager;
+    ApplyManager applyManager;
 
     @Resource
-    AuditManagerImpl auditManager;
+    AuditManager auditManager;
 
     @Override
     public void doOperate(Long userId , Date startDate , Date endDate ,String reason) throws BLLException{
@@ -39,10 +41,11 @@ public class SickApplyOperate implements ApplyOperate,AuditOperate {
 
         int used = 0;
         for(ApplyDO item : list){
+            if(item.getResult() == null )continue;
             if (!DateUtils.checkUseless(item.getApplyDate()) && item.getResult().equals(AuditStatus.SUCCESS))
                 used += DateUtils.getDuration(item.getStartDate(), item.getEndDate());
         }
-        SickApplySalaryRule sickApplySalaryRule = new SickApplySalaryRule();
+//        SickApplySalaryRule sickApplySalaryRule = new SickApplySalaryRule();
 //        int salaryDays = 0;
 //        if(days + used > SickApplySalaryRule.DAYS_OF_SICK) salaryDays = sickApplySalaryRule.getSalaryInc(days + used);
 

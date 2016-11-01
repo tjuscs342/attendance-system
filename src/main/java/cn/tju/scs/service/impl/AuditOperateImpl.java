@@ -8,12 +8,14 @@ import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.exception.DAOException;
 import cn.tju.scs.exception.Exceptions;
 import cn.tju.scs.service.AuditOperate;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 /**
  * Created by lichen.ll on 2016/9/8.
  */
+@Service
 public class AuditOperateImpl implements AuditOperate {
 
     @Resource

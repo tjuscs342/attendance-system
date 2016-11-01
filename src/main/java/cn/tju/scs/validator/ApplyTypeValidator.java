@@ -12,6 +12,12 @@ public class ApplyTypeValidator {
             return true;
         else if( type.equals(ApplyTypes.APPLY_SICK))
             return true;
+        else if(type.equals(ApplyTypes.APPLY_EVENT))
+            return true;
+        else if(type.equals(ApplyTypes.APPLY_MARRY))
+            return true;
+        else if(type.equals(ApplyTypes.APPLY_MATERNITY))
+            return true;
         return false;
     }
 }

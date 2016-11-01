@@ -4,6 +4,7 @@ import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.domain.UserDO;
 import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.manager.ApplyManager;
+import cn.tju.scs.service.ApplyOperate;
 import cn.tju.scs.service.impl.*;
 import cn.tju.scs.util.DateUtils;
 import cn.tju.scs.util.JSONBuilder;
@@ -27,7 +28,16 @@ import java.util.List;
 public class ApplyController {
 
     private Logger logger = Logger.getLogger(ApplyController.class);
-
+    @Resource(name = "yearApplyOperate")
+    ApplyOperate yearApplyOperate;
+    @Resource(name = "sickApplyOperate")
+    ApplyOperate sickApplyOperate;
+    @Resource(name = "marryApplyOperate")
+    ApplyOperate marryApplyOperate;
+    @Resource(name = "eventApplyOperate")
+    ApplyOperate eventApplyOperate;
+    @Resource(name = "maternityApplyOperate")
+    ApplyOperate maternityApplyOperate;
     @Resource
     ApplyManager applyManager;
 
@@ -46,23 +56,23 @@ public class ApplyController {
                 return JSONBuilder.buildErrorReturn("请假日期区间不合法");
             }
             if(type == 1){
-                YearApplyOperate yearApplyOperate = new YearApplyOperate();
+//                YearApplyOperate yearApplyOperate = new YearApplyOperate();
                 yearApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
             }
             else if(type == 2){
-                SickApplyOperate sickApplyOperate = new SickApplyOperate();
+//                SickApplyOperate sickApplyOperate = new SickApplyOperate();
                 sickApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
             }
             else if(type == 3){
-                MarryApplyOperate marryApplyOperate =new MarryApplyOperate();
+//                MarryApplyOperate marryApplyOperate =new MarryApplyOperate();
                 marryApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
             }
             else if(type == 4){
-                EventApplyOperate eventApplyOperate =new EventApplyOperate();
+ //               EventApplyOperate eventApplyOperate =new EventApplyOperate();
                 eventApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
             }
             else if(type == 5){
-                MaternityApplyOperate maternityApplyOperate =new MaternityApplyOperate();
+//                MaternityApplyOperate maternityApplyOperate =new MaternityApplyOperate();
                 maternityApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
             }
 //            applyManager.clearUselessApply(userDO.getUserId(),type);
