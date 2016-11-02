@@ -45,6 +45,7 @@ public class ApplyController {
     @ResponseBody
     public Object apply ( Integer type , String reason , String start , String end , HttpSession session){
         UserDO userDO= (UserDO)session.getAttribute("user");
+        if(userDO == null) return JSONBuilder.buildErrorReturn("you need to login");
         if( type == null || start == null || end == null )
             return JSONBuilder.buildErrorReturn("参数不完整");
         if(!ApplyTypeValidator.checkType(type))
