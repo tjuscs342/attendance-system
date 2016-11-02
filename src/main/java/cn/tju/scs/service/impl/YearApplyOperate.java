@@ -8,6 +8,7 @@ import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.exception.Exceptions;
 import cn.tju.scs.manager.ApplyManager;
 import cn.tju.scs.manager.AuditManager;
+import cn.tju.scs.manager.impl.ApplyManagerImpl;
 import cn.tju.scs.service.ApplyOperate;
 import cn.tju.scs.service.AuditOperate;
 import cn.tju.scs.util.DateUtils;
@@ -20,7 +21,10 @@ import java.util.Date;
 /**
  * Created by lichen.ll on 2016/9/7.
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> lyj_new
 @Service("yearApplyOperate")
 public class YearApplyOperate implements ApplyOperate,AuditOperate {
 
@@ -41,8 +45,12 @@ public class YearApplyOperate implements ApplyOperate,AuditOperate {
 
         int used = 0;
         for (ApplyDO item : list) {
+<<<<<<< HEAD
             //出现非法的数据
             if( item.getResult() == null) continue;
+=======
+            if(item.getResult() == null )continue;
+>>>>>>> lyj_new
             if (!DateUtils.checkUseless(item.getApplyDate()) && item.getResult().equals(AuditStatus.SUCCESS))
                 used += DateUtils.getDuration(item.getStartDate(), item.getEndDate());
         }

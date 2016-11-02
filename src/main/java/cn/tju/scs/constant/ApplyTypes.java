@@ -7,4 +7,12 @@ public interface ApplyTypes {
 
     //年假
     Integer APPLY_YEAR = 1;
+    //病假
+    Integer APPLY_SICK = 2;
+    //marry vacation
+    Integer APPLY_MARRY = 3;
+    //event vacation
+    Integer APPLY_EVENT = 4;
+    //Maternity vacation
+    Integer APPLY_MATERNITY = 5;
 }

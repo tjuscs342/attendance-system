@@ -52,7 +52,7 @@ public class ApplyManagerImpl implements ApplyManager {
     }
 
     @Override
-    public List<ApplyDO> selectApplys(Long userId) throws BLLException {
+    public List<ApplyDO>    selectApplys(Long userId) throws BLLException {
         if (userId == null)
             throw Exceptions.newBLLException(ErrorConstantColletion.UserException.NULL_USER_ID_ERROR);
 
@@ -82,12 +82,15 @@ public class ApplyManagerImpl implements ApplyManager {
     @Override
     public void clearUselessApply(Long userId, Integer applyType) throws BLLException {
         List<ApplyDO> list = this.selectApplysByType(userId, applyType);
-        for (ApplyDO applyDO : list) {
-            if(!DateUtils.checkUseless(applyDO.getApplyDate())) continue;
-            try{
-                applyDAO.deleteApplyDO(applyDO.getApplicationId());
-            }catch ( DAOException e ){
-                throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
+        if (list == null) throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
+        else {
+            for (ApplyDO applyDO : list) {
+                if (!DateUtils.checkUseless(applyDO.getApplyDate())) continue;
+                try {
+                    applyDAO.deleteApplyDO(applyDO.getApplicationId());
+                } catch (DAOException e) {
+                    throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
+                }
             }
         }
     }
