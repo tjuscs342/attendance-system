@@ -5,10 +5,8 @@ import cn.tju.scs.domain.UserDO;
 import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.manager.ApplyManager;
 import cn.tju.scs.service.ApplyOperate;
-<<<<<<< HEAD
-=======
 import cn.tju.scs.service.impl.*;
->>>>>>> lyj_new
+
 import cn.tju.scs.util.DateUtils;
 import cn.tju.scs.util.JSONBuilder;
 import cn.tju.scs.validator.ApplyTypeValidator;
@@ -42,9 +40,6 @@ public class ApplyController {
     @Resource(name = "maternityApplyOperate")
     ApplyOperate maternityApplyOperate;
     @Resource
-    ApplyOperate yearApplyOperate;
-
-    @Resource
     ApplyManager applyManager;
 
     @RequestMapping(method=RequestMethod.POST)
@@ -62,11 +57,6 @@ public class ApplyController {
             if( DateUtils.getDuration(startDate,endDate) < 1 ){
                 return JSONBuilder.buildErrorReturn("请假日期区间不合法");
             }
-<<<<<<< HEAD
-            //applyManager.clearUselessApply(userDO.getUserId(),type);
-            yearApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
-            //applyManager.applyByType(userDO.getUserId(),startDate,endDate,type,reason);
-=======
             if(type == 1){
 //                YearApplyOperate yearApplyOperate = new YearApplyOperate();
                 yearApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
@@ -89,7 +79,6 @@ public class ApplyController {
             }
 //            applyManager.clearUselessApply(userDO.getUserId(),type);
 //            applyManager.applyByType(userDO.getUserId(),startDate,endDate,type,reason);
->>>>>>> lyj_new
         }catch ( ParseException e ){
             return JSONBuilder.buildErrorReturn("日期格式错误");
         }catch ( BLLException e ){
