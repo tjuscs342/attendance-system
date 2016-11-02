@@ -7,12 +7,19 @@
           <element id="module-output" name="attendence-system" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.mortbay.jetty:jetty-plus:6.1.9" />
+          <element id="library" level="project" name="Maven: geronimo-spec:geronimo-spec-jta:1.0.1B-rc4" />
+          <element id="library" level="project" name="Maven: org.mortbay.jetty:jetty-naming:6.1.9" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-servlets:9.0.0.M0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-continuation:9.0.0.M0" />
+          <element id="library" level="project" name="Maven: org.eclipse.jetty:jetty-util:9.0.0.M0" />
           <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.16.8" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:r09" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.0" />
-          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.2.5.RELEASE" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.2.5.RELEASE" />
