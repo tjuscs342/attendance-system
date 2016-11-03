@@ -15,4 +15,6 @@ public interface ApplyTypes {
     Integer APPLY_EVENT = 4;
     //Maternity vacation
     Integer APPLY_MATERNITY = 5;
+    //With Maternity vacation
+    Integer APPLY_WITHMATERNITY = 6;
 }
