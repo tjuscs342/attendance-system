@@ -39,6 +39,8 @@ public class ApplyController {
     ApplyOperate eventApplyOperate;
     @Resource(name = "maternityApplyOperate")
     ApplyOperate maternityApplyOperate;
+    @Resource(name = "withMaternityOperator")
+    ApplyOperate withmaternityOperator;
     @Resource
     ApplyManager applyManager;
 
@@ -76,6 +78,9 @@ public class ApplyController {
             else if(type == 5){
 //                MaternityApplyOperate maternityApplyOperate =new MaternityApplyOperate();
                 maternityApplyOperate.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+            else if (type == 6){
+                withmaternityOperator.doOperate(userDO.getUserId(),startDate,endDate,reason);
             }
 //            applyManager.clearUselessApply(userDO.getUserId(),type);
 //            applyManager.applyByType(userDO.getUserId(),startDate,endDate,type,reason);

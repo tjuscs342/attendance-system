@@ -18,6 +18,8 @@ public class ApplyTypeValidator {
             return true;
         else if(type.equals(ApplyTypes.APPLY_MATERNITY))
             return true;
+        else if(type.equals(ApplyTypes.APPLY_WITHMATERNITY))
+            return true;
         return false;
     }
 }
