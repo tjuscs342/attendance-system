@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by yangwentao on 11/3/16.
  */
-@Service("WithMaternityOperator")
+@Service("withMaternityOperator")
 public class WithMaternityOperator implements ApplyOperate,AuditOperate{
     @Resource
     AuditManager auditManager;
@@ -36,7 +36,6 @@ public class WithMaternityOperator implements ApplyOperate,AuditOperate{
     public void auditFail(String remark, Long operatorId, String operatorName, Long applicationId) throws BLLException {
         auditManager.auditApply(applicationId,AuditStatus.FAIL,remark,operatorId,operatorName);
     }
-
     @Override
     public void doOperate(Long userId, Date startDate, Date endDate, String reason) throws BLLException {
         int days = DateUtils.getDuration(startDate,endDate);
