@@ -17,4 +17,10 @@ public interface ApplyTypes {
     Integer APPLY_MATERNITY = 5;
     //With Maternity vacation
     Integer APPLY_WITHMATERNITY = 6;
+    //OverTime
+    Integer Apply_OverTime = 7;
+    //FixOverTime
+    Integer Apply_FixOverTime = 8;
+    //FixMoney
+    Integer Apply_FixMoney = 9;
 }
