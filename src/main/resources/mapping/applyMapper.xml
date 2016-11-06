@@ -40,6 +40,12 @@
             <if test="applyType != null">
               AND  apply_type = #{applyType}
             </if>
+            <if test="startDate != null">
+              AND   start_Date = #{startDate}
+            </if>
+            <if test="endDate != null">
+                AND end_Date = #{endDate}
+            </if>
         </where>
     </select>
 

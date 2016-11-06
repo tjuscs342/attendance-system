@@ -72,4 +72,17 @@ public class UserManagerImpl implements UserManager {
             throw Exceptions.newBLLException(ErrorConstantColletion.UserException.GET_USER_INFO_ERROR);
         }
     }
+
+    @Override
+    public List<UserDO> getUserListByBossId( Long bossId)throws BLLException{
+        UserDO userDO = new UserDO();
+        userDO.setBossId(bossId);
+        try{
+            List<UserDO> list = userDAO.selectUser(userDO);
+            return list;
+        } catch (DAOException e){
+            logger.error(ErrorConstantColletion.UserException.GET_USER_INFO_ERROR, e);
+            throw Exceptions.newBLLException(ErrorConstantColletion.UserException.GET_USER_INFO_ERROR);
+        }
+    }
 }

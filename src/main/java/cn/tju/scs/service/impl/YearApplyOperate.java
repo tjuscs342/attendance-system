@@ -34,7 +34,7 @@ public class YearApplyOperate implements ApplyOperate,AuditOperate {
     public void doOperate(Long userId, Date startDate, Date endDate, String reason) throws BLLException {
 
         int days = DateUtils.getDuration(startDate, endDate);
-        applyManager.clearUselessApply(userId, ApplyTypes.APPLY_YEAR);
+//        applyManager.clearUselessApply(userId, ApplyTypes.APPLY_YEAR);
         List<ApplyDO> list = applyManager.selectApplysByType(userId, ApplyTypes.APPLY_YEAR);
         if (list == null)
             throw Exceptions.newBLLException(ErrorConstantColletion.SYSTEM_ERROR);
