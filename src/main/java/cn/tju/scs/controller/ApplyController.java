@@ -41,6 +41,12 @@ public class ApplyController {
     ApplyOperate maternityApplyOperate;
     @Resource(name = "withMaternityOperator")
     ApplyOperate withmaternityOperator;
+    @Resource(name = "fixOverTimeApplyOperator")
+    ApplyOperate fixOverTimeApplyOperator;
+    @Resource(name = "overTimeApplyOperator")
+    ApplyOperate overTimeApplyOperator;
+    @Resource(name = "fixMoneyApplyOperator")
+    ApplyOperate fixMoneyApplyOperator;
     @Resource
     ApplyManager applyManager;
 
@@ -81,6 +87,15 @@ public class ApplyController {
             }
             else if (type == 6){
                 withmaternityOperator.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+            else if (type == 7){
+                overTimeApplyOperator.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+            else if (type == 8){
+                fixOverTimeApplyOperator.doOperate(userDO.getUserId(),startDate,endDate,reason);
+            }
+            else if (type == 9){
+                fixMoneyApplyOperator.doOperate(userDO.getUserId(),startDate,endDate,reason);
             }
 //            applyManager.clearUselessApply(userDO.getUserId(),type);
 //            applyManager.applyByType(userDO.getUserId(),startDate,endDate,type,reason);

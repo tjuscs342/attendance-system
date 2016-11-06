@@ -20,6 +20,12 @@ public class ApplyTypeValidator {
             return true;
         else if(type.equals(ApplyTypes.APPLY_WITHMATERNITY))
             return true;
+        else if(type.equals(ApplyTypes.Apply_FixMoney))
+            return true;
+        else if(type.equals(ApplyTypes.Apply_FixOverTime))
+            return true;
+        else if(type.equals(ApplyTypes.Apply_OverTime))
+            return true;
         return false;
     }
 }
