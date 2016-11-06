@@ -23,7 +23,7 @@ public class AuditController {
     @Resource
     AuditManager auditManager;
 
-    @RequestMapping(method = RequestMethod.GET )
+    @RequestMapping(value = "auditlist",method = RequestMethod.GET )
     @ResponseBody
     public Object getApplyToAudit ( HttpSession session ){
         try{
@@ -38,7 +38,7 @@ public class AuditController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT )
+    @RequestMapping(value = "auditapply",  method = RequestMethod.PUT )
     @ResponseBody
     public Object audit (@RequestParam String auditStatus ,
                          @RequestParam String remark ,

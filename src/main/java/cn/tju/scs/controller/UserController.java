@@ -26,7 +26,7 @@ public class UserController {
     private UserManager userManager;
 
 
-    @RequestMapping(method= RequestMethod.GET)
+    @RequestMapping(value="checkme",method= RequestMethod.GET)
     @ResponseBody
     public Object getUserInfo ( HttpSession session ){
         try {
@@ -56,6 +56,7 @@ public class UserController {
             Map<String, Object> result_noBoss = Maps.newHashMap();
             result_noBoss.put("Warning","boss not exist");
             if (boss_userDO == null){
+                session.setAttribute("user",userDO);
                 return JSONBuilder.buildSuccessReturn(result_noBoss);
             }
             Map<String, Object> result = Maps.newHashMap();
