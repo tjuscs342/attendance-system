@@ -23,6 +23,20 @@
         <jetty.version>6.1.9</jetty.version>
     </properties>
     <dependencies>
+        <!--AssertJ断言工具-->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.5.2</version>
+            <scope>test</scope>
+        </dependency>
+        <!--Mokito Mock工具-->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>2.0.2-beta</version>
+            <scope>test</scope>
+        </dependency>
         <!--jetty CORS-->
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
