@@ -10,6 +10,7 @@ import cn.tju.scs.manager.ApplyManager;
 import cn.tju.scs.manager.AuditManager;
 import cn.tju.scs.service.ApplyOperate;
 import cn.tju.scs.service.AuditOperate;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.List;
 /**
  * Created by liu on 16-10-30.
  */
+@Service("MaternityExtraApplyOperate")
 public class MaternityExtraApplyOperate implements ApplyOperate,AuditOperate {
     @Resource
     ApplyManager applyManager;
