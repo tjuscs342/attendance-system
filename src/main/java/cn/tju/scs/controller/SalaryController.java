@@ -61,6 +61,7 @@ public class SalaryController {
     @ResponseBody
     public Object getMonthSalary(Long userID, String date) {
         int salary = 0;
+        boolean test = true;
      try {
          Date param = new Date();
          param = DateUtils.parseDate(date);
@@ -71,14 +72,31 @@ public class SalaryController {
              applyDO.setUserId(userID);
              List<ApplyDO> sickList = applyManager.selectApplysByType(userID, ApplyTypes.APPLY_SICK);
              List<ApplyDO> eventList = applyManager.selectApplysByType(userID, ApplyTypes.APPLY_EVENT);
-             if (sickList == null && eventList == null)
+             List<ApplyDO> fixMoneyList = applyManager.selectApplysByType(userID,ApplyTypes.Apply_FixMoney);
+             List<ApplyDO> sickList1 = Lists.newArrayList();
+             List<ApplyDO> eventList1 = Lists.newArrayList();
+             List<ApplyDO> fixMoneyList1 = Lists.newArrayList();
+             for(ApplyDO applyDO1 : sickList){
+                 if (applyDO1.getResult() == 2)
+                     sickList1.add(applyDO1);
+             }
+             for (ApplyDO applyDO1 : eventList){
+                 if (applyDO1.getResult() == 2){
+                     eventList1.add(applyDO1);
+                 }
+             }
+             for (ApplyDO applyDO1 : fixMoneyList){
+                 if (applyDO1.getResult() == 2)
+                     fixMoneyList1.add(applyDO1);
+             }
+             if (sickList1 == null && eventList1 == null && fixMoneyList1 == null)
                  return JSONBuilder.buildSuccessReturn("0");
-             if (sickList != null)
-             for (ApplyDO item : sickList) {
+             if (sickList1 != null)
+                 for (ApplyDO item : sickList1) {
                  for (int day = 1; day <= time.getActualMaximum(Calendar.DAY_OF_MONTH); day++) {
                      time.set(Calendar.DATE, day);
                      if (time.getTime().compareTo(item.getStartDate()) >= 0
-                             && time.getTime().compareTo(item.getEndDate()) <= 0)
+                             && time.getTime().compareTo(item.getEndDate()) <= 0 && item.getResult() == 2)
                          salary--;
                      if ((time.getTime().compareTo(item.getStartDate()) >= 0
                              && time.getTime().compareTo(item.getEndDate()) <= 0) && (DateUtils.isWeekend(time.getTime()) ||
@@ -88,10 +106,13 @@ public class SalaryController {
                                      || time.getTime().getDate() == 3))))
                          salary++;
                  }
-//                 if (sickList != null) salary++;
+                 if (test){
+                     salary ++;
+                     test = false;
+                 }
              }
-             if(eventList != null)
-             for (ApplyDO item : eventList) {
+             if(eventList1 != null)
+             for (ApplyDO item : eventList1) {
                  for (int day = 1; day <= time.getActualMaximum(Calendar.DAY_OF_MONTH); day++) {
                      time.set(Calendar.DATE, day);
                      if (time.getTime().compareTo(item.getStartDate()) >= 0
@@ -105,6 +126,21 @@ public class SalaryController {
                          salary++;
                  }
              }
+             if (fixMoneyList1 != null)
+                 for (ApplyDO item : fixMoneyList1){
+                     for (int day = 1 ; day <= time.getActualMaximum(Calendar.DAY_OF_MONTH); day++){
+                         time.set(Calendar.DATE,day);
+                         if (time.getTime().compareTo(item.getStartDate()) >= 0
+                                 && time.getTime().compareTo(item.getEndDate()) <= 0)
+                             salary++;
+                         if (((time.getTime().getMonth() + 1 == 5) && time.getTime().getDate() == 1) ||
+                                 ((time.getTime().getMonth() + 1 == 1) && time.getTime().getDate() == 1) ||
+                                 ((time.getTime().getMonth() + 1 == 10) && (time.getTime().getDate() == 1 || time.getTime().getDate() == 2
+                                         || time.getTime().getDate() == 3)))
+                             salary++;
+                     }
+                 }
+
              return JSONBuilder.buildSuccessReturn(salary);
 
          } catch (BLLException e) {
