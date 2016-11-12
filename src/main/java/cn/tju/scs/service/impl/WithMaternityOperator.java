@@ -2,8 +2,10 @@ package cn.tju.scs.service.impl;
 
 import cn.tju.scs.constant.ApplyTypes;
 import cn.tju.scs.constant.AuditStatus;
+import cn.tju.scs.constant.ErrorConstantColletion;
 import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.exception.BLLException;
+import cn.tju.scs.exception.Exceptions;
 import cn.tju.scs.manager.ApplyManager;
 import cn.tju.scs.manager.AuditManager;
 import cn.tju.scs.service.ApplyOperate;
@@ -40,6 +42,8 @@ public class WithMaternityOperator implements ApplyOperate,AuditOperate{
     public void doOperate(Long userId, Date startDate, Date endDate, String reason) throws BLLException {
         int days = DateUtils.getDuration(startDate,endDate);
         //applyManager.clearUselessApply(userId, ApplyTypes.APPLY_WITHMATERNITY);
+        if (days > 7)
+            throw Exceptions.newBLLException(ErrorConstantColletion.ApplyRuleException.WMApply_TOO_MUCH);
         applyManager.applyByType(userId, startDate, endDate, ApplyTypes.APPLY_WITHMATERNITY, reason);
     }
 }

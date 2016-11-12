@@ -23,6 +23,8 @@ public class ErrorConstantColletion {
         public final static ErrorEntity APPLY_TOO_MUCH_EVENT = new ErrorEntity("APPLY_TOO_MUCH_EVENT","should less than 14 days");
         public final static ErrorEntity APPLY_TOO_MUCH_MATERNITY = new ErrorEntity("APPLY_TOO_MUCH_MATERNITY","you apply too much");
         public final static ErrorEntity APPLY_NOT_SUIT_MATERNITY = new ErrorEntity("APPLY_NOT_SUIT_MATERNITY","sorry,you are male");
+        public final static ErrorEntity WMApply_TOO_MUCH = new ErrorEntity("WMAPPLY_TOO_MUCH","陪产假不能超过七天");
+
     }
 
     public final static ErrorEntity SYSTEM_ERROR = new ErrorEntity("SYSTEM_ERROR","系统繁忙");
