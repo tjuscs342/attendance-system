@@ -1,3 +1,42 @@
+假期类型
+    //年假
+    Integer APPLY_YEAR = 1;
+    //病假
+    Integer APPLY_SICK = 2;
+    //婚假
+    Integer APPLY_MARRY = 3;
+    //事假
+    Integer APPLY_EVENT = 4;
+    //产假
+    Integer APPLY_MATERNITY = 5;
+    //待产假
+    Integer APPLY_WITHMATERNITY = 6;
+    //加班
+    Integer Apply_OverTime = 7;
+    //倒休（与加班同时录入）
+    Integer Apply_FixOverTime = 8;
+    //双薪加班（与加班同时录入）
+    Integer Apply_FixMoney = 9;
+
+
+审核状态
+    //审核中
+    Integer PENDING = 1;
+
+    //审核成功
+    Integer SUCCESS = 2;
+
+    //审核失败
+    Integer FAIL = 3;
+
+审核操作
+    //通过
+    String auditStatus = agree；
+    //拒绝
+    String auditStatus = disagree；
+
+
+接口
 # attendance-system
 a simple attendance system
 
@@ -34,7 +73,6 @@ URL: /apply,method=POST
 {
 	"type":"年假",
 	"reason":"出去旅游",
-	"handOver":"老大",
 	"start":"2016-8-11",
 	"end":"2016-8-12"
 }
@@ -131,7 +169,7 @@ URL: /apply,method=GET
 
 6.获取自己需要审批的申请列表
 
-URL: /audit,method=GET
+URL: /audit/auditlist,method=GET
 
 参数:
 {}
@@ -173,7 +211,6 @@ URL: /apply,method=PUT
 	"applyId":"777",
 	"type":"年假",
 	"reason":"出去旅游",
-	"handOver":"老大",
 	"start":"2016-8-11",
 	"end":"2016-8-12"	
 }
