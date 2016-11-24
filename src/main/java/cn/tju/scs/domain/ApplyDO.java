@@ -14,6 +14,8 @@ import java.util.Date;
 public class ApplyDO {
     //用户id
     private Long userId;
+    //用户名
+    private String userName;
     //申请的id
     private Long applicationId;
     //申请日期
@@ -144,4 +146,8 @@ public class ApplyDO {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+    public String getUserName(){return userName;}
+
+    public void setUserName(String userName){   this.userName = userName;}
 }

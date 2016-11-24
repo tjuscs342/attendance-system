@@ -55,6 +55,9 @@ public class AuditManagerImpl implements AuditManager{
             for ( UserDO userDO : users ){
                 applyDO.setUserId(userDO.getUserId());
                 List<ApplyDO> applys = applyDAO.selectApplyDO(applyDO);
+                for ( ApplyDO applyDO1 : applys){
+                    applyDO1.setUserName(userDO.getUserName());
+                }
                 list.addAll(applys);
             }
             return list;
