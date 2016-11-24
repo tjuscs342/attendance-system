@@ -39,12 +39,9 @@ public class AuditController {
         }
     }
 
-    @RequestMapping(value = "auditapply",  method = RequestMethod.PUT )
+    @RequestMapping(value = "auditapply",method = RequestMethod.POST )
     @ResponseBody
-    public Object audit (@RequestParam String auditStatus ,
-                         @RequestParam String remark ,
-                         @RequestParam Long applicationId ,
-                         @RequestParam HttpSession session ){
+    public Object audit ( String auditStatus , String remark , Long applicationId , HttpSession session ){
         try{
             UserDO userDO = (UserDO)session.getAttribute("user");
             int status = 1;

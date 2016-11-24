@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +38,7 @@ public class AuditManagerImpl implements AuditManager{
         param.setOperatorId(operatorId);
         param.setRemark(remark);
         param.setOperatorName(operatorName);
+        param.setAuditDate(new Date());
         try {
             applyDAO.updateApplyDO(param);
         }catch ( DAOException e ){
