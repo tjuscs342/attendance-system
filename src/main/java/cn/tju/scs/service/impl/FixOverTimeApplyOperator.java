@@ -35,6 +35,6 @@ public class FixOverTimeApplyOperator implements AuditOperate,ApplyOperate{
 
     @Override
     public void doOperate(Long userId, Date startDate, Date endDate, String reason) throws BLLException {
-        applyManager.applyByType(userId, startDate, endDate, ApplyTypes.APPLY_WITHMATERNITY, reason);
+        applyManager.applyByType(userId, startDate, endDate, ApplyTypes.Apply_FixOverTime, reason);
     }
 }
