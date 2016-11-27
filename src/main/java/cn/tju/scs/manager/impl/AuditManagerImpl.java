@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +38,7 @@ public class AuditManagerImpl implements AuditManager{
         param.setOperatorId(operatorId);
         param.setRemark(remark);
         param.setOperatorName(operatorName);
+        param.setAuditDate(new Date());
         try {
             applyDAO.updateApplyDO(param);
         }catch ( DAOException e ){
@@ -55,6 +57,9 @@ public class AuditManagerImpl implements AuditManager{
             for ( UserDO userDO : users ){
                 applyDO.setUserId(userDO.getUserId());
                 List<ApplyDO> applys = applyDAO.selectApplyDO(applyDO);
+                for ( ApplyDO applyDO1 : applys){
+                    applyDO1.setUserName(userDO.getUserName());
+                }
                 list.addAll(applys);
             }
             return list;

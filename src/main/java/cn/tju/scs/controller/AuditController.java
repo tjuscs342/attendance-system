@@ -1,5 +1,6 @@
 package cn.tju.scs.controller;
 
+import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.domain.UserDO;
 import cn.tju.scs.exception.BLLException;
 import cn.tju.scs.manager.AuditManager;
@@ -29,7 +30,7 @@ public class AuditController {
         try{
             UserDO userDO = (UserDO)session.getAttribute("user");
             long userId = userDO.getUserId();
-            List list = auditManager.selectApplys(userId);
+            List<ApplyDO> list = auditManager.selectApplys(userId);
             System.out.println(list.size());
             return JSONBuilder.buildSuccessReturn(list);
         }catch ( BLLException e ){
@@ -38,12 +39,9 @@ public class AuditController {
         }
     }
 
-    @RequestMapping(value = "auditapply",  method = RequestMethod.PUT )
+    @RequestMapping(value = "auditapply",method = RequestMethod.POST )
     @ResponseBody
-    public Object audit (@RequestParam String auditStatus ,
-                         @RequestParam String remark ,
-                         @RequestParam Long applicationId ,
-                         @RequestParam HttpSession session ){
+    public Object audit ( String auditStatus , String remark , Long applicationId , HttpSession session ){
         try{
             UserDO userDO = (UserDO)session.getAttribute("user");
             int status = 1;

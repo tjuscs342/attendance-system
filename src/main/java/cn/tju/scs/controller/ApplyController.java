@@ -1,8 +1,10 @@
 package cn.tju.scs.controller;
 
+import cn.tju.scs.dao.ApplyDAO;
 import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.domain.UserDO;
 import cn.tju.scs.exception.BLLException;
+import cn.tju.scs.exception.DAOException;
 import cn.tju.scs.manager.ApplyManager;
 import cn.tju.scs.service.ApplyOperate;
 import cn.tju.scs.service.impl.*;
@@ -49,6 +51,8 @@ public class ApplyController {
     ApplyOperate fixMoneyApplyOperator;
     @Resource
     ApplyManager applyManager;
+    @Resource
+    ApplyDAO applyDAO;
 
     @RequestMapping(method=RequestMethod.POST)
     @ResponseBody
@@ -120,14 +124,13 @@ public class ApplyController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "modify",method = RequestMethod.POST)
     @ResponseBody
-    public Object updateApply ( @RequestParam Long applyId ,
-                                @RequestParam(required = false) String start ,
-                                @RequestParam(required = false) Integer type,
-                                @RequestParam(required = false) String end,
-                                @RequestParam(required = false) String reason){
+    public Object updateApply ( Long applyId , String start , Integer type, String end, String reason,HttpSession session){
         try {
+            if (applyId == null){
+                return JSONBuilder.buildErrorReturn("没有选定假期");
+            }
             Date startDate=null,endDate=null;
             if( start != null )
                 startDate= DateUtils.parseDate(start);
