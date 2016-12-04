@@ -1,14 +1,13 @@
 package cn.tju.scs.util;
 
 import cn.tju.scs.domain.ApplyDO;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
 /**
- * Created by y on 12/4/16.
+ * Created by yangwentao on 12/4/16.
  */
 public class ApplyDoGenerator {
     Random r1 = new Random();
@@ -61,6 +60,6 @@ public class ApplyDoGenerator {
         apd.setOperatorId(r1.nextLong());
         apd.setOperatorName(nextString(3));
         apd.setRemark(nextString(100));
-
+        return apd;
     }
 }
