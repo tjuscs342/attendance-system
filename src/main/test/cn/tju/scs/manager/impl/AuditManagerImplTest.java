@@ -65,7 +65,7 @@ public class AuditManagerImplTest {
     }
 
     @Test
-    public void test_auditApplt_expect_exception ( ) throws Exception {
+    public void test_auditApplt_expect_exception () throws Exception {
         try {
             Mockito.doThrow(new DAOException()).when(applyDAO).updateApplyDO(any(ApplyDO.class));
             auditManager.auditApply(1L, 1, "呵呵", 2L, "嘿嘿");

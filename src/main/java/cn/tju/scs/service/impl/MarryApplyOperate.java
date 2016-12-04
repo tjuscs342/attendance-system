@@ -32,7 +32,7 @@ public class MarryApplyOperate implements ApplyOperate,AuditOperate {
     @Override
     public void doOperate(Long userId , Date startDate , Date endDate , String reason) throws BLLException{
         int days = DateUtils.getDuration(startDate,endDate);
-        applyManager.clearUselessApply(userId, ApplyTypes.APPLY_MARRY   );
+//        applyManager.clearUselessApply(userId, ApplyTypes.APPLY_MARRY   );
         UserDO userDO = userManager.getUserInfoById(userId);
         if (userDO == null)
             throw Exceptions.newBLLException(ErrorConstantColletion.UserException.GET_USER_INFO_ERROR);

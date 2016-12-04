@@ -1,6 +1,7 @@
 package cn.tju.scs.manager.impl;
 
 import cn.tju.scs.constant.ErrorConstantColletion;
+import cn.tju.scs.constant.ErrorEntity;
 import cn.tju.scs.dao.ApplyDAO;
 import cn.tju.scs.dao.UserDAO;
 import cn.tju.scs.domain.ApplyDO;
@@ -68,9 +69,9 @@ public class UserManagerImplTest {
     public void getUserInfoById_test() throws Exception{
         List<UserDO> list = Lists.newArrayList(param);
         Mockito.doReturn(list).when(userDAO).selectUser(any(UserDO.class));
-        UserDO test = userManager.getUserInfoById(1L);
+        UserDO test = userManager.getUserInfoById(3L);
         Assertions.assertThat(test).isNotNull();
-        Assertions.assertThat(test.getUserId()).isEqualTo(1L);
+        Assertions.assertThat(test.getUserId()).isEqualTo(3L);
     }
     @Test
     public void getUserInfoById_Exception() throws Exception{
@@ -78,7 +79,7 @@ public class UserManagerImplTest {
             Mockito.doThrow(new DAOException()).when(userDAO).selectUser(any(UserDO.class));
             userManager.getUserInfoById(param.getUserId());
         }catch (BLLException e){
-            Assertions.assertThat(e.getErrorCode()).isEqualTo(ErrorConstantColletion.SYSTEM_ERROR.getErrorCode());
+            Assertions.assertThat(e.getErrorCode()).isEqualTo(ErrorConstantColletion.UserException.GET_USER_INFO_ERROR.getErrorCode());
             return;
         }
         fail("未抛出期望异常");

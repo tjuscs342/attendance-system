@@ -78,8 +78,8 @@ public class ApplyManagerImplTest {
     public void test_apply_expect_exception() throws Exception{
         try {
             Mockito.doThrow(new DAOException()).when(applyDAO).insertApplyDO(any(ApplyDO.class));
-            applyManager.applyByType(10L,new SimpleDateFormat("yyyy-MM-dd").parse("2016-3-21"),
-                    new SimpleDateFormat().parse("2016-3-31"),1,"哈哈");
+            applyManager.applyByType(10L,new SimpleDateFormat("yyyy-MM-dd").parse("2016-03-21"),
+                    new SimpleDateFormat().parse("2016-03-31"),1,"哈哈");
         }catch ( BLLException e ){
             Assertions.assertThat(e.getErrorCode()).isEqualTo(ErrorConstantColletion.ApplyRuleException.APPLY_TOO_MUCH);
             return;
