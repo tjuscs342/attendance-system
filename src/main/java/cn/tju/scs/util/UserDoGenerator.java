@@ -16,7 +16,7 @@ public class UserDoGenerator {
         return str;
     }
     Random r1 = new Random();
-    UserDO generator(){
+    public UserDO generator(){
         UserDO ud = new UserDO();
         ud.setAge(r1.nextInt(50));
         ud.setBossId(r1.nextLong());

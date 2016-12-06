@@ -10,6 +10,7 @@ import java.util.Random;
  * Created by yangwentao on 12/4/16.
  */
 public class ApplyDoGenerator {
+
     Random r1 = new Random();
     String nextString(int sizeOf){
         String str = new String();
@@ -44,7 +45,7 @@ public class ApplyDoGenerator {
         }  
         return rtn;  
     }
-    ApplyDO generator(int type){
+    public ApplyDO generator(int type){
         
         ApplyDO apd = new ApplyDO();
         apd.setUserId(r1.nextLong());

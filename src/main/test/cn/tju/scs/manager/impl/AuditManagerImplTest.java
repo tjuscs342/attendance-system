@@ -87,15 +87,4 @@ public class AuditManagerImplTest {
         Assertions.assertThat(result.size()).isEqualTo(1);
         Assertions.assertThat(result.get(0).getUserId()).isEqualTo(users.get(0).getUserId());
     }
-    @Test
-    public void selectApplys_fail() throws Exception{
-        try{
-            Mockito.doThrow(new DAOException()).when(applyDAO).selectApplyDO(any(ApplyDO.class));
-            auditManager.selectApplys(userDO.getBossId());
-        }catch (BLLException e){
-            Assertions.assertThat(e.getErrorCode()).isEqualTo(ErrorConstantColletion.SYSTEM_ERROR.getErrorCode());
-            return;
-        }
-        fail("未抛出期望异常");
-    }
 }

@@ -6,15 +6,15 @@ import cn.tju.scs.dao.UserDAO;
 import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.domain.UserDO;
 import cn.tju.scs.exception.BLLException;
-import cn.tju.scs.exception.DAOException;
 import cn.tju.scs.manager.AuditManager;
 import cn.tju.scs.manager.UserManager;
 import cn.tju.scs.manager.impl.AuditManagerImpl;
 import cn.tju.scs.manager.impl.UserManagerImpl;
 import cn.tju.scs.service.impl.EventApplyOperate;
-import cn.tju.scs.service.impl.YearApplyOperate;
+import cn.tju.scs.service.impl.FixMoneyApplyOperator;
 import cn.tju.scs.util.ApplyDoGenerator;
 import cn.tju.scs.util.UserDoGenerator;
+import com.google.common.collect.Lists;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,14 +26,15 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import static org.mockito.Matchers.any;
 
 /**
- * Created by liu on 16-12-4.
+ * Created by liu on 16-12-6.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class eventApplyTest {
+public class fixMoneyApplyTest {
     @InjectMocks
     AuditManager auditManager = new AuditManagerImpl();
     @InjectMocks
@@ -45,7 +46,7 @@ public class eventApplyTest {
     @Mock
     UserDAO userDAO;
     @Mock
-    EventApplyOperate eventApplyOperate;
+    FixMoneyApplyOperator fixMoneyApplyOperator;
 
     UserDO userDO = new UserDO();
     ApplyDO applyDO = new ApplyDO();
@@ -65,14 +66,9 @@ public class eventApplyTest {
     }
     @Test
     public void doOperate_test() throws Exception{
-        Mockito.doNothing().when(applyDAO).insertApplyDO(any(ApplyDO.class));
-        eventApplyOperate.doOperate(1L,applyDO.getStartDate(),applyDO.getEndDate(),"haha");
-    }
-    @Test
-    public void doOperate_Exception()throws Exception{
         ApplyDoGenerator applyDoGenerator = new ApplyDoGenerator();
         UserDoGenerator userDoGenerator = new UserDoGenerator();
-        for(int i = 0 ; i <= 0 ; i++){
+        for(int i = 0 ; i <= 30 ; i++){
             applyDoGenerator.generator(2);
             UserDO userDO_P = new UserDO();
             ApplyDO applyDO_P = new ApplyDO();
@@ -80,14 +76,7 @@ public class eventApplyTest {
             userDO_P = userDoGenerator.generator();
             System.out.println(applyDO_P.getStartDate());
             System.out.println(applyDO_P.getEndDate());
-            try{
-                eventApplyOperate.doOperate(userDO_P.getUserId(),applyDO_P.getStartDate(),applyDO_P.getEndDate(),"haha");
-            }catch (BLLException e){
-                System.out.println(e.getErrorCode());
-                Assertions.assertThat(e.getErrorCode()).isEqualTo(ErrorConstantColletion.ApplyRuleException.APPLY_TOO_MUCH.getErrorCode());
-                return;
-            }
+            fixMoneyApplyOperator.doOperate(userDO_P.getUserId(),applyDO_P.getStartDate(),applyDO_P.getEndDate(),"haha");
         }
-
     }
 }
