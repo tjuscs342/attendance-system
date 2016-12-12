@@ -63,9 +63,10 @@ public class ApplyController {
         if (!ApplyTypeValidator.checkType(type))
             return JSONBuilder.buildErrorReturn("当前类型的假期不支持");
         try {
+            Long l = new Long(0);
             Date startDate = DateUtils.parseDate(start);
             Date endDate = DateUtils.parseDate(end);
-            if (isApply(userDO.getUserId(), startDate, endDate) == false) {
+            if (isApply(userDO.getUserId(),l,startDate, endDate) == false) {
                 return JSONBuilder.buildErrorReturn("此段时间已请过假");
             }
             if (DateUtils.getDuration(startDate, endDate) < 1) {
@@ -123,6 +124,7 @@ public class ApplyController {
     @RequestMapping(value = "modify", method = RequestMethod.POST)
     @ResponseBody
     public Object updateApply(Long applyId, String start, Integer type, String end, String reason, HttpSession session) {
+        UserDO userDO = (UserDO) session.getAttribute("user");
         try {
             if (applyId == null) {
                 return JSONBuilder.buildErrorReturn("没有选定假期");
@@ -132,21 +134,26 @@ public class ApplyController {
                 startDate = DateUtils.parseDate(start);
             if (end != null)
                 endDate = DateUtils.parseDate(end);
+            if (isApply(userDO.getUserId(), applyId,startDate, endDate) == false) {
+                return JSONBuilder.buildErrorReturn("此段时间已请过假");
+            }
             applyManager.updateApplyInfo(applyId, type, startDate, endDate, reason);
         } catch (ParseException e) {
             return JSONBuilder.buildErrorReturn(e.getMessage());
         } catch (BLLException e) {
             return JSONBuilder.buildErrorReturn(e.getErrorMessage());
+        } catch (Exception e){
+            return JSONBuilder.buildErrorReturn(e.getMessage());
         }
         return JSONBuilder.buildSuccessReturn(null);
     }
 
-    public boolean isApply(Long userId, Date start, Date end) throws Exception {
+    public boolean isApply(Long userId,Long applyId, Date start, Date end) throws Exception {
 
         List<ApplyDO> list = Lists.newArrayList();
         list = applyManager.selectApplys(userId);
         for (ApplyDO applyDO1 : list) {
-            if (applyDO1.getResult() ==3) {
+            if (applyDO1.getResult() == 3 || applyDO1.getApplicationId() == applyId) {
                 continue;
             }
                 Date date1 = applyDO1.getStartDate();
