@@ -153,7 +153,9 @@ public class ApplyController {
         List<ApplyDO> list = Lists.newArrayList();
         list = applyManager.selectApplys(userId);
         for (ApplyDO applyDO1 : list) {
-            if (applyDO1.getResult() == 3 || applyDO1.getApplicationId() == applyId) {
+            Integer result = applyDO1.getResult();
+            Long id = applyDO1.getApplicationId();
+            if (result.compareTo(3)==0 || id.compareTo(applyId) == 0) {
                 continue;
             }
                 Date date1 = applyDO1.getStartDate();
