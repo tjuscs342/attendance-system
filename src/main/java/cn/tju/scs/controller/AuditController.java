@@ -30,10 +30,6 @@ public class AuditController {
     AuditManager auditManager;
     @Resource
     ApplyManager applyManager;
-    @Resource
-    ApplyDAO applyDAO;
-    @Resource
-    ApplyDO applyDO;
 
     @RequestMapping(value = "auditlist",method = RequestMethod.GET )
     @ResponseBody
@@ -55,8 +51,6 @@ public class AuditController {
     public Object audit ( String auditStatus , String remark , Long applicationId , HttpSession session ){
         try{
             UserDO userDO = (UserDO)session.getAttribute("user");
-            applyDO.setApplicationId(applicationId);
-            ApplyDO applyDO1 = applyDAO.selectApplyDO(applyDO).get(0);
             int status = 1;
             if( auditStatus.equals("agree"))
                 status = 2;
@@ -69,8 +63,6 @@ public class AuditController {
         }catch ( BLLException e ){
             e.printStackTrace();
             return JSONBuilder.buildErrorReturn(e.getErrorMessage());
-        }catch (DAOException e){
-            return JSONBuilder.buildErrorReturn(e.getMessage());
         }catch (Exception e){
             return JSONBuilder.buildErrorReturn(e.getMessage());
         }

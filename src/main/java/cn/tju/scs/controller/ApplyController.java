@@ -52,8 +52,6 @@ public class ApplyController {
     ApplyOperate fixMoneyApplyOperator;
     @Resource
     ApplyManager applyManager;
-    @Resource
-    ApplyDAO applyDAO;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
