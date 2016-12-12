@@ -1,13 +1,18 @@
 package cn.tju.scs.controller;
 
+import cn.tju.scs.dao.ApplyDAO;
 import cn.tju.scs.domain.ApplyDO;
 import cn.tju.scs.domain.UserDO;
 import cn.tju.scs.exception.BLLException;
+import cn.tju.scs.exception.DAOException;
+import cn.tju.scs.manager.ApplyManager;
 import cn.tju.scs.manager.AuditManager;
 import cn.tju.scs.util.JSONBuilder;
+import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -23,6 +28,12 @@ public class AuditController {
 
     @Resource
     AuditManager auditManager;
+    @Resource
+    ApplyManager applyManager;
+    @Resource
+    ApplyDAO applyDAO;
+    @Resource
+    ApplyDO applyDO;
 
     @RequestMapping(value = "auditlist",method = RequestMethod.GET )
     @ResponseBody
@@ -44,6 +55,8 @@ public class AuditController {
     public Object audit ( String auditStatus , String remark , Long applicationId , HttpSession session ){
         try{
             UserDO userDO = (UserDO)session.getAttribute("user");
+            applyDO.setApplicationId(applicationId);
+            ApplyDO applyDO1 = applyDAO.selectApplyDO(applyDO).get(0);
             int status = 1;
             if( auditStatus.equals("agree"))
                 status = 2;
@@ -56,6 +69,11 @@ public class AuditController {
         }catch ( BLLException e ){
             e.printStackTrace();
             return JSONBuilder.buildErrorReturn(e.getErrorMessage());
+        }catch (DAOException e){
+            return JSONBuilder.buildErrorReturn(e.getMessage());
+        }catch (Exception e){
+            return JSONBuilder.buildErrorReturn(e.getMessage());
         }
     }
+
 }

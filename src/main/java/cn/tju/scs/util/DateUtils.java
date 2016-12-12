@@ -15,7 +15,7 @@ public class DateUtils {
     public static int getDuration (Date start , Date end ){
         final long msOfDay = 86400000L;
         Long ret = (end.getTime()-start.getTime())/msOfDay;
-        return ret.intValue();
+        return ret.intValue() + 1;
     }
 
     //无用的申请true

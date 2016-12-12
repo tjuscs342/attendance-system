@@ -43,6 +43,8 @@ public class YearApplyOperate implements ApplyOperate,AuditOperate {
         for (ApplyDO item : list) {
             //出现非法的数据
             if( item.getResult() == null) continue;
+
+      //      if (item.getStartDate())
             if (!DateUtils.checkUseless(item.getApplyDate()) && item.getResult().equals(AuditStatus.SUCCESS))
                 used += DateUtils.getDuration(item.getStartDate(), item.getEndDate());
         }
