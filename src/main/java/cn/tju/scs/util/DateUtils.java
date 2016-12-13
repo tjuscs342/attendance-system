@@ -29,6 +29,16 @@ public class DateUtils {
                 return true;
         return false;
     }
+    public static boolean checkUseless(Date date1 , Date date2){
+        DateFormat format = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        String s1 = format.format( date1 );
+        String s2 = format.format( date2 );
+        for ( int i = 0 ; i < 4 ; i++ )
+            if( !(s1.charAt(i) == s2.charAt(i))){
+                return true;
+        }
+        return false;
+    }
     public static boolean checkUselessByMonth ( Date date,Date date1 ){
         DateFormat format = DateFormat.getDateInstance(DateFormat.MEDIUM);
         String s1 = format.format( date );
@@ -64,5 +74,18 @@ public class DateUtils {
     public static Date parseDate ( String pattern ) throws ParseException{
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.parse(pattern);
+    }
+
+    public static Date splitDate(Date start,Date end,int x){
+        Date start1 = start;
+        Date end1 = end;
+        if (x == 0){
+            start1.setMonth(11);
+            return getLastDay(start1);
+        }
+        else {
+            end1.setMonth(0);
+            return getFirstDay(end1);
+        }
     }
 }

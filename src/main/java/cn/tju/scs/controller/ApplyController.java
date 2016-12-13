@@ -129,6 +129,7 @@ public class ApplyController {
             if (applyId == null) {
                 return JSONBuilder.buildErrorReturn("没有选定假期");
             }
+
             Date startDate = null, endDate = null;
             if (start != null)
                 startDate = DateUtils.parseDate(start);
